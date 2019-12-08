@@ -92,8 +92,6 @@ public class ConexaoMysql {
             ResultSet rs;
 
             rs = stmt.executeQuery(query);
-            System.out.println(rs);
-            connection.close();
             return rs;
 
         } catch (SQLException e) {
