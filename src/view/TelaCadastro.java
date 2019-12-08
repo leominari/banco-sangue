@@ -40,8 +40,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         lbBairro = new javax.swing.JLabel();
         lbEndereco = new javax.swing.JLabel();
         tfNomeCompleto = new javax.swing.JTextField();
-        tfNumeroDoc = new javax.swing.JTextField();
-        tfDataNascimento = new javax.swing.JTextField();
         tfNomeMae = new javax.swing.JTextField();
         tfNomePai = new javax.swing.JTextField();
         tfEndereco = new javax.swing.JTextField();
@@ -49,6 +47,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         tfBairro = new javax.swing.JTextField();
         tfComplemento = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        tfNumeroDoc = new javax.swing.JFormattedTextField();
+        tfDataNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +74,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         lbNumeroDoc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbNumeroDoc.setForeground(new java.awt.Color(0, 5, 70));
-        lbNumeroDoc.setText("Número do Documento");
+        lbNumeroDoc.setText("Número do CPF");
 
         lbNomePai.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbNomePai.setForeground(new java.awt.Color(0, 5, 70));
@@ -111,6 +111,18 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
+        try {
+            tfNumeroDoc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            tfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,57 +130,55 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbCadastroDoador)
                         .addGap(173, 173, 173))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNomeCompleto)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lbNumeroDoc)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tfNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(lbNomeCompleto))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbDataNascimento)
+                                        .addComponent(lbNumeroDoc)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfDataNascimento))
+                                        .addComponent(tfNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lbDataNascimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfDataNascimento))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNomePai)
+                                    .addComponent(lbEndereco)
+                                    .addComponent(lbBairro)
+                                    .addComponent(lbNomeMae))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbNomePai)
-                                            .addComponent(lbEndereco)
-                                            .addComponent(lbBairro)
-                                            .addComponent(lbNomeMae))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfNomeMae)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(tfNomeMae)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(tfBairro)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(lbComplemento)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(lbNumero)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(tfNumero))))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(tfBairro)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(tfNomePai)))))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(99, 99, 99)
-                                    .addComponent(tfNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(lbComplemento)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tfComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lbNumero)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tfNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfNomePai))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbBancoSangue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(tfNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -292,12 +302,12 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lbNumeroDoc;
     private javax.swing.JTextField tfBairro;
     private javax.swing.JTextField tfComplemento;
-    private javax.swing.JTextField tfDataNascimento;
+    private javax.swing.JFormattedTextField tfDataNascimento;
     private javax.swing.JTextField tfEndereco;
     private javax.swing.JTextField tfNomeCompleto;
     private javax.swing.JTextField tfNomeMae;
     private javax.swing.JTextField tfNomePai;
     private javax.swing.JTextField tfNumero;
-    private javax.swing.JTextField tfNumeroDoc;
+    private javax.swing.JFormattedTextField tfNumeroDoc;
     // End of variables declaration//GEN-END:variables
 }

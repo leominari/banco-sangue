@@ -37,8 +37,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lbBancoSangue = new javax.swing.JLabel();
         lbDocumentoDoador = new javax.swing.JLabel();
-        tfDocumentoDoador = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
+        tfDocumentoDoador = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,17 +48,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
         lbDocumentoDoador.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbDocumentoDoador.setForeground(new java.awt.Color(128, 0, 0));
-        lbDocumentoDoador.setText("Documento do Doador");
+        lbDocumentoDoador.setText("CPF do Doador");
         lbDocumentoDoador.setToolTipText("");
-
-        tfDocumentoDoador.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        tfDocumentoDoador.setForeground(new java.awt.Color(128, 0, 0));
-        tfDocumentoDoador.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfDocumentoDoador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDocumentoDoadorActionPerformed(evt);
-            }
-        });
 
         btnVerificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(120, 0, 0));
@@ -68,6 +59,12 @@ public class TelaInicial extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
+
+        try {
+            tfDocumentoDoador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,14 +77,14 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
+                        .addGap(241, 241, 241)
+                        .addComponent(btnVerificar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbDocumentoDoador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDocumentoDoador)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(btnVerificar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(tfDocumentoDoador))))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,9 +93,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(lbBancoSangue)
                 .addGap(38, 38, 38)
                 .addComponent(lbDocumentoDoador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfDocumentoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(21, 21, 21)
                 .addComponent(btnVerificar)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
@@ -129,10 +126,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }
     
     
-    private void tfDocumentoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDocumentoDoadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDocumentoDoadorActionPerformed
-
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         if (tfDocumentoDoador.getText() == null || tfDocumentoDoador.getText().trim().equals("")){
             System.out.println("vazio carai");
@@ -186,7 +179,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbBancoSangue;
     private javax.swing.JLabel lbDocumentoDoador;
-    private javax.swing.JTextField tfDocumentoDoador;
+    private javax.swing.JFormattedTextField tfDocumentoDoador;
     // End of variables declaration//GEN-END:variables
     private Doador doador;
 
