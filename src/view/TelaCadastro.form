@@ -295,9 +295,6 @@
         <Component class="javax.swing.JTextField" name="tfNomeMae">
         </Component>
         <Component class="javax.swing.JTextField" name="tfNomePai">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNomePaiActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfEndereco">
         </Component>

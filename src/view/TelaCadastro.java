@@ -5,11 +5,78 @@
  */
 package view;
 
+import controller.Doador;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.CorrigeData;
+import model.Querys;
+import model.ValidaCPF;
+
 /**
  *
  * @author leo_m
  */
 public class TelaCadastro extends javax.swing.JFrame {
+
+    private boolean verificaDados() {
+        ValidaCPF vcpf = new ValidaCPF();
+        if (tfNomeCompleto.getText() == null || tfNomeCompleto.getText().trim().equals("")) {
+            erroCamp = 1;
+            return false;
+        } else if (tfNumeroDoc.getText() == null || tfNumeroDoc.getText().trim().equals("") || !vcpf.isCPF(tfNumeroDoc.getText())) {
+            erroCamp = 2;
+            return false;
+        } else if (tfDataNascimento.getText() == null || tfDataNascimento.getText().trim().equals("")) {
+            erroCamp = 3;
+            return false;
+        } else if (tfNomeMae.getText() == null || tfNomeMae.getText().trim().equals("")) {
+            erroCamp = 4;
+            return false;
+        } else if (tfNomePai.getText() == null || tfNomePai.getText().trim().equals("")) {
+            erroCamp = 5;
+            return false;
+        } else if (tfEndereco.getText() == null || tfEndereco.getText().trim().equals("")) {
+            erroCamp = 6;
+            return false;
+        } else if (tfNumero.getText() == null || tfNumero.getText().trim().equals("")) {
+            erroCamp = 7;
+            return false;
+        } else if (tfBairro.getText() == null || tfBairro.getText().trim().equals("")) {
+            erroCamp = 8;
+            return false;
+        } else if (tfComplemento.getText() == null || tfComplemento.getText().trim().equals("")) {
+            erroCamp = 9;
+            return false;
+        }
+        erroCamp = 0;
+        return true;
+    }
+
+    private void cadastro() throws SQLException {
+        if (verificaDados()) {
+            this.doador = new Doador();
+            CorrigeData cd = new CorrigeData();
+            Querys qr = new Querys();
+            doador.setNomeCompleto(tfNomeCompleto.getText());
+            doador.setNomeMae(tfNomeMae.getText());
+            doador.setNomePai(tfNomePai.getText());
+            doador.setDocumento(tfNumeroDoc.getText());
+            doador.setNumero(Integer.parseInt(tfNumero.getText()));
+            doador.setEndereco(tfEndereco.getText());
+            doador.setBairro(tfBairro.getText());
+            doador.setComplemento(tfComplemento.getText());
+            doador.setDataNascimento(cd.correcao(tfDataNascimento.getText()));
+            if (qr.novoDoador(doador)) {
+                JOptionPane.showMessageDialog(null, "Pessoa inserida!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro na insercao!");
+            }
+        } else {
+
+        }
+    }
 
     /**
      * Creates new form telaCadastro
@@ -95,12 +162,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         lbEndereco.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbEndereco.setForeground(new java.awt.Color(0, 5, 70));
         lbEndereco.setText("Endereço");
-
-        tfNomePai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNomePaiActionPerformed(evt);
-            }
-        });
 
         btnCadastrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(128, 0, 0));
@@ -243,12 +304,12 @@ public class TelaCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        try {
+            cadastro();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void tfNomePaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomePaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNomePaiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,4 +371,21 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField tfNumero;
     private javax.swing.JFormattedTextField tfNumeroDoc;
     // End of variables declaration//GEN-END:variables
+    private Doador doador;
+    private int erroCamp;
+
+    /**
+     * @return the doador
+     */
+    public Doador getDoador() {
+        return doador;
+    }
+
+    /**
+     * @param doador the doador to set
+     */
+    public void setDoador(Doador doador) {
+        this.doador = doador;
+    }
+
 }

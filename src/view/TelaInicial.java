@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Querys;
+import model.ValidaCPF;
 
 /**
  *
@@ -110,28 +112,29 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void buscaDoador(String documento) throws SQLException{
-        if(this.doador.getDados(documento)){
+
+    private void buscaDoador(String documento) throws SQLException {
+        if (this.doador.getDados(documento)) {
             //vai pra tela de doadcao
-        }else{
+        } else {
             TelaCadastro tc = new TelaCadastro();
             dispose();
             tc.setVisible(true);
         }
-        
+
     }
-    
-    
+
+
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-        if (tfDocumentoDoador.getText() == null || tfDocumentoDoador.getText().trim().equals("")){
-            System.out.println("vazio carai");
-        }
-        else
+        ValidaCPF vcpf = new ValidaCPF();
+        if (tfDocumentoDoador.getText() == null || tfDocumentoDoador.getText().trim().equals("") || !vcpf.isCPF(tfDocumentoDoador.getText())) {
+            JOptionPane.showMessageDialog(null, "Insira um CPF valido.");
+        } else {
             try {
                 buscaDoador(tfDocumentoDoador.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnVerificarActionPerformed
 
