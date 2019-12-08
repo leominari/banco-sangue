@@ -5,16 +5,23 @@
  */
 package view;
 
+import controller.Doador;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Querys;
+
 /**
  *
  * @author leo_m
  */
-public class telaInicial extends javax.swing.JFrame {
+public class TelaInicial extends javax.swing.JFrame {
 
     /**
      * Creates new form telaInicial
      */
-    public telaInicial() {
+    public TelaInicial() {
         initComponents();
     }
 
@@ -56,6 +63,11 @@ public class telaInicial extends javax.swing.JFrame {
         btnVerificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(120, 0, 0));
         btnVerificar.setText("Verificar");
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,10 +116,34 @@ public class telaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void buscaDoador(String documento) throws SQLException{
+        if(this.doador.getDados(documento)){
+            //vai pra tela de doadcao
+        }else{
+            TelaCadastro tc = new TelaCadastro();
+            dispose();
+            tc.setVisible(true);
+        }
+        
+    }
+    
+    
     private void tfDocumentoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDocumentoDoadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDocumentoDoadorActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        if (tfDocumentoDoador.getText() == null || tfDocumentoDoador.getText().trim().equals("")){
+            System.out.println("vazio carai");
+        }
+        else
+            try {
+                buscaDoador(tfDocumentoDoador.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVerificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,20 +162,21 @@ public class telaInicial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaInicial().setVisible(true);
+                new TelaInicial().setVisible(true);
             }
         });
     }
@@ -151,4 +188,19 @@ public class telaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel lbDocumentoDoador;
     private javax.swing.JTextField tfDocumentoDoador;
     // End of variables declaration//GEN-END:variables
+    private Doador doador;
+
+    /**
+     * @return the doador
+     */
+    public Doador getDoador() {
+        return doador;
+    }
+
+    /**
+     * @param doador the doador to set
+     */
+    public void setDoador(Doador doador) {
+        this.doador = doador;
+    }
 }

@@ -29,6 +29,7 @@ public class Querys {
 
     public ResultSet doador(String documento) throws SQLException {
         ResultSet rs;
+        CorrigeData cr = new CorrigeData();
         query = "SELECT * FROM doador WHERE doador.documento = " + documento;
         ConexaoMysql banco = new ConexaoMysql();
         rs = banco.exQuery(query);
