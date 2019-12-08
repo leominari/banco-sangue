@@ -100,4 +100,19 @@ public class ConexaoMysql {
         }
         return null;
     }
+    
+        public boolean upQuery(String query) {
+
+        try {
+            Connection connection = getConexaoMySQL();
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(query);
+            return true;
+
+        } catch (SQLException e) {
+            System.err.println("ERROU ");
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
 }

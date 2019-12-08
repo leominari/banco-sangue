@@ -49,6 +49,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         } else if (tfComplemento.getText() == null || tfComplemento.getText().trim().equals("")) {
             erroCamp = 9;
             return false;
+        } else if (!rbtnFem.isSelected() && !rbtnMasc.isSelected()) {
+            erroCamp = 10;
+            return false;
         }
         erroCamp = 0;
         return true;
@@ -68,6 +71,11 @@ public class TelaCadastro extends javax.swing.JFrame {
             doador.setBairro(tfBairro.getText());
             doador.setComplemento(tfComplemento.getText());
             doador.setDataNascimento(cd.correcao(tfDataNascimento.getText()));
+            if (rbtnMasc.isSelected()) {
+                doador.setSexo("M");
+            } else {
+                doador.setSexo("F");
+            }
             if (qr.novoDoador(doador)) {
                 JOptionPane.showMessageDialog(null, "Pessoa inserida!");
             } else {
@@ -94,6 +102,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGSexo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbCadastroDoador = new javax.swing.JLabel();
         lbBancoSangue = new javax.swing.JLabel();
@@ -116,6 +125,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         tfNumeroDoc = new javax.swing.JFormattedTextField();
         tfDataNascimento = new javax.swing.JFormattedTextField();
+        lbSexo = new javax.swing.JLabel();
+        rbtnMasc = new javax.swing.JRadioButton();
+        rbtnFem = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +146,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         lbDataNascimento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbDataNascimento.setForeground(new java.awt.Color(0, 5, 70));
         lbDataNascimento.setText("Data de Nascimento");
+        lbDataNascimento.setToolTipText("");
 
         lbNomeMae.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lbNomeMae.setForeground(new java.awt.Color(0, 5, 70));
@@ -183,6 +196,25 @@ public class TelaCadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        tfDataNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDataNascimentoActionPerformed(evt);
+            }
+        });
+
+        lbSexo.setForeground(new java.awt.Color(0, 5, 70));
+        lbSexo.setText("Sexo");
+
+        btnGSexo.add(rbtnMasc);
+        rbtnMasc.setText("M");
+        rbtnMasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnMascActionPerformed(evt);
+            }
+        });
+
+        btnGSexo.add(rbtnFem);
+        rbtnFem.setText("F");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,17 +229,6 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbNomeCompleto)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbNumeroDoc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbDataNascimento)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfDataNascimento))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNomePai)
@@ -234,12 +255,30 @@ public class TelaCadastro extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(tfNomePai))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(tfNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbBancoSangue)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(tfNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbNomeCompleto)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbNumeroDoc)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfNumeroDoc)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lbDataNascimento)))
+                                .addGap(10, 10, 10)
+                                .addComponent(tfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbSexo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbtnMasc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnFem)
+                                .addGap(21, 21, 21)))))
                 .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -262,7 +301,10 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(lbNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDataNascimento)
                     .addComponent(tfNumeroDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbSexo)
+                    .addComponent(rbtnMasc)
+                    .addComponent(rbtnFem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNomeMae)
@@ -311,6 +353,14 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void rbtnMascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMascActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnMascActionPerformed
+
+    private void tfDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDataNascimentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +399,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.ButtonGroup btnGSexo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbBancoSangue;
@@ -361,6 +412,9 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lbNomePai;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbNumeroDoc;
+    private javax.swing.JLabel lbSexo;
+    private javax.swing.JRadioButton rbtnFem;
+    private javax.swing.JRadioButton rbtnMasc;
     private javax.swing.JTextField tfBairro;
     private javax.swing.JTextField tfComplemento;
     private javax.swing.JFormattedTextField tfDataNascimento;

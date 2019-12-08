@@ -28,7 +28,21 @@ public class Doador {
     private Integer numero;
     private String complemento;
     private String dataNascimento;
+    private String sexo;
 
+    public void leDoador(){
+        System.out.println(nomeCompleto);
+        System.out.println(nomeMae);
+        System.out.println(nomePai);
+        System.out.println(documento);
+        System.out.println(endereco);
+        System.out.println(bairro);
+        System.out.println(numero);
+        System.out.println(complemento);
+        System.out.println(dataNascimento);
+        System.out.println(sexo);
+    }
+    
     public boolean getDados(String documento) throws SQLException {
         Querys dados = new Querys();
         ResultSet rs = dados.doador(documento);
@@ -44,6 +58,7 @@ public class Doador {
             this.numero = Integer.parseInt(rs.getString("numero"));
             this.complemento = rs.getString("complemento");
             this.dataNascimento = rs.getString("dataNascimento");
+            this.setSexo(rs.getString("sexo"));
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "Doador nao encontrado, indo para pagina de cadastro.");
@@ -189,6 +204,20 @@ public class Doador {
      */
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
 }

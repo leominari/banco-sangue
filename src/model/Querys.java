@@ -21,15 +21,9 @@ public class Querys {
 
     private String query;
 
-    public Date convDataBanco(String dataBanco) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
-        Date date = (Date) formatter.parse("01/29/02");
-        return date;
-    }
 
     public ResultSet doador(String documento) throws SQLException {
         ResultSet rs;
-        CorrigeData cr = new CorrigeData();
         query = "SELECT * FROM doador WHERE doador.documento = " + documento;
         ConexaoMysql banco = new ConexaoMysql();
         rs = banco.exQuery(query);
@@ -39,11 +33,9 @@ public class Querys {
 
     public boolean novoDoador(Doador doador) throws SQLException {
         ResultSet rs;
-        query = "INSERT INTO `doador`(`nome`, `dataNascimento`, `nomeMae`, `nomePai`, `documento`, `endereco`, `bairro`, `numero`, `complemento`) \n"
-                + "        VALUES(" + doador.getNomeCompleto() + "," + doador.getDataNascimento() + "," + doador.getNomeMae() + "," + doador.getNomePai() + "," + doador.getDocumento() + "," + doador.getEndereco() + "," + doador.getBairro() + "," + doador.getNumero() + "," + doador.getComplemento();
+        doador.leDoador();
+        query = "INSERT INTO `doador`(`nome`, `dataNascimento`, `sexo`, `nomeMae`, `nomePai`, `documento`, `endereco`, `bairro`, `numero`, `complemento`) VALUES ('" + doador.getNomeCompleto() + "','" + doador.getDataNascimento() + "', '" + doador.getSexo() + "','" + doador.getNomeMae() + "', '" + doador.getNomePai() + "'," + doador.getDocumento() +", '" + doador.getEndereco() + "', '" + doador.getBairro() + "'," + doador.getNumero() + ", '" + doador.getComplemento() + "');";
         ConexaoMysql banco = new ConexaoMysql();
-        rs = banco.exQuery(query);
-        System.out.println(rs);
-        return !rs.wasNull();
+        return banco.upQuery(query);
     }
 }
