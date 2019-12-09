@@ -6,8 +6,10 @@
 package view;
 
 import controller.Doador;
+import controller.Triagem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import model.Querys;
 
 /**
  *
@@ -45,13 +47,13 @@ public class TelaPerguntas extends javax.swing.JFrame {
                 case 4:
                     erro += "Doença de Chagas.";
                     break;
-                case 5:
+                case 6:
                     erro += "Sífilis.";
                     break;
-                case 6:
+                case 7:
                     erro += "AIDS.";
                     break;
-                case 7:
+                case 8:
                     erro += "HTLV.";
                     break;
             }
@@ -66,9 +68,10 @@ public class TelaPerguntas extends javax.swing.JFrame {
     private boolean yesorNot(JRadioButton sim, JRadioButton nao, int pergunta) {
         boolean resultado;
         if (taSelecionado(sim, nao, pergunta)) {
-            resultado = sim.isSelected();
+            resultado = !nao.isSelected();
+            return resultado;
         }
-        return false;
+        return true;
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,7 +105,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
         HTLV = new javax.swing.JLabel();
         lbSim8 = new javax.swing.JRadioButton();
         lbNao8 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btnTriagem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -186,10 +189,10 @@ public class TelaPerguntas extends javax.swing.JFrame {
         lbNao8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbNao8.setText("Não");
 
-        jButton1.setText("TERMINAR TRIAGEM");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTriagem.setText("TERMINAR TRIAGEM");
+        btnTriagem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTriagemActionPerformed(evt);
             }
         });
 
@@ -206,7 +209,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(243, 243, 243)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton1)
+                                .addComponent(btnTriagem)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lbSim4)
                                     .addGap(18, 18, 18)
@@ -318,16 +321,33 @@ public class TelaPerguntas extends javax.swing.JFrame {
                     .addComponent(lbSim4)
                     .addComponent(lbNao4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnTriagem)
                 .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnTriagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriagemActionPerformed
+        Querys qr = new Querys();
+        Triagem triagem = new Triagem();
+        triagem.setAnemia(yesorNot(lbSim1, lbNao1, 1));
+        triagem.setHepatiteB(yesorNot(lbSim2, lbNao2, 2));
+        triagem.setHepatiteC(yesorNot(lbSim3, lbNao3, 3));
+        triagem.setChagas(yesorNot(lbSim4, lbNao4, 4));
+        triagem.setSifilis(yesorNot(lbSim6, lbNao6, 6));
+        triagem.setAids(yesorNot(lbSim7, lbNao7, 7));
+        triagem.setHtlv(yesorNot(lbSim8, lbNao8, 8));
+        triagem.setIdDoador(doador.getIdDoador());
+        triagem.leTriagem();
+        if(triagem.liberacao()){
+            qr.novaTriagem(triagem);
+            JOptionPane.showMessageDialog(null, doador.getNomeCompleto()+" liberado para doação!");
+            dispose();
+            TelaInicial ti = new TelaInicial();
+            ti.setVisible(true);
+        }
+    }//GEN-LAST:event_btnTriagemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,6 +392,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
     private javax.swing.JLabel HepatiteB;
     private javax.swing.JLabel HepatiteC;
     private javax.swing.JLabel Sifilis;
+    private javax.swing.JButton btnTriagem;
     private javax.swing.ButtonGroup grpAIDS;
     private javax.swing.ButtonGroup grpAnemia;
     private javax.swing.ButtonGroup grpChagas;
@@ -379,7 +400,6 @@ public class TelaPerguntas extends javax.swing.JFrame {
     private javax.swing.ButtonGroup grpHepatiteB;
     private javax.swing.ButtonGroup grpHepatiteC;
     private javax.swing.ButtonGroup grpSifilis;
-    private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton lbNao1;
     private javax.swing.JRadioButton lbNao2;
     private javax.swing.JRadioButton lbNao3;

@@ -6,6 +6,7 @@
 package view;
 
 import controller.Doador;
+import controller.Triagem;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -128,7 +129,7 @@ public class TelaInicial extends javax.swing.JFrame {
             ta.setVisible(true);
         } else {
             TelaCadastro tc = new TelaCadastro();
-            dispose();
+            tc.dispose();
             tc.setVisible(true);
         }
 
@@ -196,7 +197,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfDocumentoDoador;
     // End of variables declaration//GEN-END:variables
     private Doador doador;
-
+    private Triagem triagem;
     /**
      * @return the doador
      */
@@ -209,5 +210,19 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public void setDoador(Doador doador) {
         this.doador = doador;
+    }
+
+    /**
+     * @return the triagem
+     */
+    public Triagem getTriagem() {
+        return triagem;
+    }
+
+    /**
+     * @param triagem the triagem to set
+     */
+    public void setTriagem(Triagem triagem) {
+        this.triagem = triagem;
     }
 }
