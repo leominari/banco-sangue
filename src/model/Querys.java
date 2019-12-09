@@ -48,8 +48,20 @@ public class Querys {
         Date dia = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String datual = dateFormat.format(dia);
-        query = "INSERT INTO doacoes(idDoador, dataDoacao, idTriagem) VALUES ("+ doador.getIdDoador() + ",'" + datual + "',(SELECT idTriagem FROM triagem WHERE triagem.idDoador = " + doador.getIdDoador() + " order by triagem.idTriagem desc limit 1));";
+        query = "INSERT INTO doacoes(idDoador, dataDoacao, idTriagem) VALUES (" + doador.getIdDoador() + ",'" + datual + "',(SELECT idTriagem FROM triagem WHERE triagem.idDoador = " + doador.getIdDoador() + " order by triagem.idTriagem desc limit 1));";
         ConexaoMysql banco = new ConexaoMysql();
         return banco.upQuery(query);
+    }
+
+    public String ultimaDoacao(int idDoador) throws SQLException {
+        ResultSet rs;
+        String data = "0000-00-00";
+        query = "SELECT dataDoacao FROM `doacoes` WHERE doacoes.idDoador = " + idDoador + " order by doacoes.idDoacoes desc limit 1";
+        ConexaoMysql banco = new ConexaoMysql();
+        rs = banco.exQuery(query);
+        if (rs.next()) {
+            data = rs.getString("dataDoacao");
+        }
+        return data;
     }
 }

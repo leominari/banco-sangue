@@ -46,7 +46,6 @@ public class Doador {
     public boolean getDados(String documento) throws SQLException {
         Querys dados = new Querys();
         ResultSet rs = dados.doador(documento);
-        System.out.println(documento);
         if (!rs.wasNull() && rs.next()) {
             this.idDoador = Integer.parseInt(rs.getString("idDoador"));
             this.nomeCompleto = rs.getString("nome");

@@ -126,14 +126,18 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscaDoador(String documento) throws SQLException {
-        if (this.doador.getDados(documento)) {
-            TelaAvisos ta = new TelaAvisos();
+        doador = new Doador();
+        if (doador.getDados(documento)) {
             dispose();
+            TelaAvisos ta = new TelaAvisos();
             ta.setDoador(doador);
             ta.setVisible(true);
         } else {
-            TelaCadastro tc = new TelaCadastro();
+            doador = new Doador();
+            doador.setDocumento(tfDocumentoDoador.getText());
             dispose();
+            TelaCadastro tc = new TelaCadastro();
+            tc.setDoador(doador);
             tc.setVisible(true);
         }
 
@@ -186,10 +190,8 @@ public class TelaInicial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaInicial().setVisible(true);
         });
     }
 
@@ -202,6 +204,7 @@ public class TelaInicial extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private Doador doador;
     private Triagem triagem;
+
     /**
      * @return the doador
      */

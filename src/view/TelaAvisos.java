@@ -168,13 +168,15 @@ public class TelaAvisos extends javax.swing.JFrame {
         if (!Nao1.isSelected() && !Sim1.isSelected()) {
             JOptionPane.showMessageDialog(null, "Selecione se concorda ou não!");
         } else if (Sim1.isSelected()) {
+            dispose();
             TelaPerguntas tp = new TelaPerguntas();
             tp.setDoador(doador);
-            dispose();
+
             tp.setVisible(true);
         } else {
-            TelaInicial ti = new TelaInicial();
+            JOptionPane.showMessageDialog(null, "Você não pode doar se não concordar.");
             dispose();
+            TelaInicial ti = new TelaInicial();
             ti.setVisible(true);
         }
     }//GEN-LAST:event_btnAvancarActionPerformed
@@ -208,10 +210,8 @@ public class TelaAvisos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaAvisos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaAvisos().setVisible(true);
         });
     }
 

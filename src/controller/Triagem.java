@@ -32,15 +32,10 @@ public class Triagem {
 
     public boolean liberacao() {
         boolean lib = false;
-        if (!anemia) {
-        } else if (!hepatiteB) {
-        } else if (!hepatiteC) {
-        } else if (!sifilis) {
-        } else if (!aids) {
-        } else if (!chagas) {
-        } else if (!htlv) {
+        if (!anemia && !hepatiteB && !hepatiteC && !sifilis && !aids && !chagas && !htlv) {
             lib = true;
         }
+
         return lib;
     }
 

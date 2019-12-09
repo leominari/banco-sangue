@@ -343,12 +343,11 @@ public class TelaPerguntas extends javax.swing.JFrame {
         triagem.setAids(yesorNot(lbSim7, lbNao7, 7));
         triagem.setHtlv(yesorNot(lbSim8, lbNao8, 8));
         triagem.setIdDoador(doador.getIdDoador());
-        triagem.leTriagem();
         if (espera) {
             if (triagem.liberacao()) {
                 qr.novaTriagem(triagem);
                 qr.novaDoacao(doador);
-                if (doador.getSexo().equals('M')) {
+                if (doador.getSexo().equals("M")) {
                     JOptionPane.showMessageDialog(null, doador.getNomeCompleto() + " liberado para doação!");
                 } else {
                     JOptionPane.showMessageDialog(null, doador.getNomeCompleto() + " liberada para doação!");

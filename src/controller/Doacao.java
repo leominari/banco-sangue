@@ -5,20 +5,32 @@
  */
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.Querys;
 
 /**
  *
  * @author leo_m
  */
 public class Doacao {
+
     private Date dataDoacao;
     private int doador;
-    
-    
-    Doacao(Doador doador){
+
+    Doacao(Doador doador) {
         dataDoacao = new Date();
         this.doador = doador.getIdDoador();
+    }
+
+    public void tempoDoacao() {
+        Date dia = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String datual = dateFormat.format(dia);
+        
+        Querys qr = new Querys();
+        
     }
 
     /**
@@ -48,6 +60,5 @@ public class Doacao {
     public void setDoador(int doador) {
         this.doador = doador;
     }
-    
-    
+
 }

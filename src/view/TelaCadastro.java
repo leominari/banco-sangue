@@ -92,6 +92,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }
 
     private void cadastro() throws SQLException {
+
         if (verificaDados()) {
             this.doador = new Doador();
             CorrigeData cd = new CorrigeData();
@@ -112,8 +113,8 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
             if (qr.novoDoador(doador)) {
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-                TelaAvisos ta = new TelaAvisos();
                 dispose();
+                TelaAvisos ta = new TelaAvisos();
                 ta.setVisible(true);
                 ta.setDoador(doador);
             } else {
@@ -129,7 +130,10 @@ public class TelaCadastro extends javax.swing.JFrame {
      */
     public TelaCadastro() {
         initComponents();
+
+//        tfNumeroDoc.setText(doador.getDocumento());
     }
+//02256276805
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -431,6 +435,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCadastro().setVisible(true);
+
             }
         });
     }
