@@ -164,6 +164,9 @@ public class TelaAvisos extends javax.swing.JFrame {
         int restante = 0;
         Tempo tmp = new Tempo();
         int dias = tmp.tempoDoacao(codDoador);
+        if (dias == -1) {
+            return true;
+        }
         if (doador.getSexo().equals("M")) {
             if (dias > 90) {
             } else {

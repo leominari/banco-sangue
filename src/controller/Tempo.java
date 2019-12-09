@@ -39,7 +39,7 @@ public class Tempo {
         Querys qr = new Querys();
         tmp = qr.ultimaDoacao(idDoador);
         if(tmp.equals("0000-00-00")){
-            return 0;
+            return -1;
         }
         Date d1 = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
