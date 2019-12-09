@@ -10,6 +10,7 @@ package controller;
  * @author leo_m
  */
 public class Triagem {
+
     private int idDoador;
     private boolean anemia;
     private boolean hepatiteB;
@@ -19,8 +20,7 @@ public class Triagem {
     private boolean chagas;
     private boolean htlv;
 
-    
-    public void leTriagem(){
+    public void leTriagem() {
         System.out.println(anemia);
         System.out.println(hepatiteB);
         System.out.println(hepatiteC);
@@ -29,12 +29,21 @@ public class Triagem {
         System.out.println(chagas);
         System.out.println(htlv);
     }
-    
-    public boolean liberacao(){
-        return !(anemia && hepatiteB && hepatiteC && sifilis && aids && chagas && htlv);
+
+    public boolean liberacao() {
+        boolean lib = false;
+        if (!anemia) {
+        } else if (!hepatiteB) {
+        } else if (!hepatiteC) {
+        } else if (!sifilis) {
+        } else if (!aids) {
+        } else if (!chagas) {
+        } else if (!htlv) {
+            lib = true;
+        }
+        return lib;
     }
-    
-    
+
     /**
      * @return the anemia
      */

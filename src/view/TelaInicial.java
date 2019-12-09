@@ -63,7 +63,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        tfDocumentoDoador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###########"))));
+        try {
+            tfDocumentoDoador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         tfDocumentoDoador.setToolTipText("");
         tfDocumentoDoador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +133,7 @@ public class TelaInicial extends javax.swing.JFrame {
             ta.setVisible(true);
         } else {
             TelaCadastro tc = new TelaCadastro();
-            tc.dispose();
+            dispose();
             tc.setVisible(true);
         }
 

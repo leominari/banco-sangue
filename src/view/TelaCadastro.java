@@ -22,38 +22,35 @@ import model.ValidaCPF;
 public class TelaCadastro extends javax.swing.JFrame {
 
     private void erroDados() {
-        String erro = "Preencha a o ";
+        String erro = "Preencha ";
 
         switch (this.erroCamp) {
             case 1:
-                erro += "nome.";
+                erro += "o nome.";
                 break;
             case 2:
-                erro += "cpf.";
+                erro += "o cpf.";
                 break;
             case 3:
-                erro += "data de nascimento.";
+                erro += "a data de nascimento.";
                 break;
             case 4:
-                erro += "nome da mãe.";
+                erro += "o nome da mãe.";
                 break;
             case 5:
-                erro += "nome do pai.";
+                erro += "o nome do pai.";
                 break;
             case 6:
-                erro += "endereço.";
+                erro += "o endereço.";
                 break;
             case 7:
-                erro += "número.";
+                erro += "o número.";
                 break;
             case 8:
-                erro += "bairro.";
-                break;
-            case 9:
-                erro += "complemento.";
+                erro += "o bairro.";
                 break;
             case 10:
-                erro += "sexo.";
+                erro += "o sexo.";
                 break;
         }
         JOptionPane.showMessageDialog(null, erro);
@@ -86,9 +83,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         } else if (tfBairro.getText() == null || tfBairro.getText().trim().equals("")) {
             erroCamp = 8;
             return false;
-        } else if (tfComplemento.getText() == null || tfComplemento.getText().trim().equals("")) {
-            erroCamp = 9;
-            return false;
         } else if (!rbtnFem.isSelected() && !rbtnMasc.isSelected()) {
             erroCamp = 10;
             return false;
@@ -118,6 +112,10 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
             if (qr.novoDoador(doador)) {
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                TelaAvisos ta = new TelaAvisos();
+                dispose();
+                ta.setVisible(true);
+                ta.setDoador(doador);
             } else {
                 JOptionPane.showMessageDialog(null, "Cadastro não realizado!");
             }
