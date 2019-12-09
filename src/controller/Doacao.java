@@ -5,8 +5,10 @@
  */
 package controller;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import model.Querys;
 
@@ -24,14 +26,7 @@ public class Doacao {
         this.doador = doador.getIdDoador();
     }
 
-    public void tempoDoacao() {
-        Date dia = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String datual = dateFormat.format(dia);
-        
-        Querys qr = new Querys();
-        
-    }
+
 
     /**
      * @return the dataDoacao

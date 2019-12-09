@@ -5,8 +5,10 @@
  */
 package controller;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import view.TelaInicial;
 
@@ -18,8 +20,9 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         TelaInicial ti = new TelaInicial();
         ti.setVisible(true);
 

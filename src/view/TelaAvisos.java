@@ -6,6 +6,10 @@
 package view;
 
 import controller.Doador;
+import controller.Tempo;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,7 +51,7 @@ public class TelaAvisos extends javax.swing.JFrame {
 
         btnGAnemia.add(Sim1);
         Sim1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Sim1.setText("Sim");
+        Sim1.setText("Concordo");
         Sim1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Sim1ActionPerformed(evt);
@@ -56,7 +60,7 @@ public class TelaAvisos extends javax.swing.JFrame {
 
         btnGAnemia.add(Nao1);
         Nao1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        Nao1.setText("Não");
+        Nao1.setText("Não Concordo");
 
         lbConcorda.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbConcorda.setText("Você concorda?");
@@ -97,11 +101,14 @@ public class TelaAvisos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbTermo)
-                        .addGap(117, 117, 117))
+                        .addComponent(lbConcorda)
+                        .addGap(227, 227, 227))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAvancar)
-                        .addGap(239, 239, 239))))
+                        .addGap(239, 239, 239))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbTermo)
+                        .addGap(113, 113, 113))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,23 +125,17 @@ public class TelaAvisos extends javax.swing.JFrame {
                                     .addComponent(lbTexto4))))
                         .addGap(43, 43, 43))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Sim1)
-                                .addGap(18, 18, 18)
-                                .addComponent(Nao1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lbConcorda)
-                                .addGap(3, 3, 3)))
-                        .addGap(224, 224, 224))))
+                        .addComponent(Sim1)
+                        .addGap(28, 28, 28)
+                        .addComponent(Nao1)
+                        .addGap(162, 162, 162))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(lbTermo)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(lbTexto1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTexto2)
@@ -148,17 +149,40 @@ public class TelaAvisos extends javax.swing.JFrame {
                 .addComponent(lbTexto6)
                 .addGap(18, 18, 18)
                 .addComponent(lbConcorda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Sim1)
                     .addComponent(Nao1))
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addComponent(btnAvancar)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private boolean tempoDoador(int codDoador) throws SQLException {
+        int restante = 0;
+        Tempo tmp = new Tempo();
+        int dias = tmp.tempoDoacao(codDoador);
+        if (doador.getSexo().equals("M")) {
+            if (dias > 90) {
+            } else {
+                restante = 90 - dias;
+                JOptionPane.showMessageDialog(null, "Doador não esta apto a doar, ainda faltam " + restante + "dias!");
+                return false;
+            }
+        } else {
+            if (dias > 120) {
+
+            } else {
+                restante = 120 - dias;
+                JOptionPane.showMessageDialog(null, "Doador não esta apto a doar, ainda faltam " + restante + " dias!");
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     private void Sim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Sim1ActionPerformed
         // TODO add your handling code here:
@@ -168,11 +192,20 @@ public class TelaAvisos extends javax.swing.JFrame {
         if (!Nao1.isSelected() && !Sim1.isSelected()) {
             JOptionPane.showMessageDialog(null, "Selecione se concorda ou não!");
         } else if (Sim1.isSelected()) {
-            dispose();
-            TelaPerguntas tp = new TelaPerguntas();
-            tp.setDoador(doador);
-
-            tp.setVisible(true);
+            try {
+                if (tempoDoador(doador.getIdDoador())) {
+                    dispose();
+                    TelaPerguntas tp = new TelaPerguntas();
+                    tp.setDoador(doador);
+                    tp.setVisible(true);
+                } else {
+                    dispose();
+                    TelaInicial ti = new TelaInicial();
+                    ti.setVisible(true);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaAvisos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Você não pode doar se não concordar.");
             dispose();
