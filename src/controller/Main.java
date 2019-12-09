@@ -5,6 +5,9 @@
  */
 package controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import view.TelaInicial;
 
 /**
@@ -21,6 +24,7 @@ public class Main {
         Doador doador = new Doador();
         ti.setVisible(true);
         ti.setDoador(doador);
+
     }
-    
+
 }

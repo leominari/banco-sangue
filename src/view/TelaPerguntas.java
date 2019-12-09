@@ -342,6 +342,7 @@ public class TelaPerguntas extends javax.swing.JFrame {
         triagem.leTriagem();
         if(triagem.liberacao()){
             qr.novaTriagem(triagem);
+            qr.novaDoacao(doador);
             JOptionPane.showMessageDialog(null, doador.getNomeCompleto()+" liberado para doação!");
             dispose();
             TelaInicial ti = new TelaInicial();

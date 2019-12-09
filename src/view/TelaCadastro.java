@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import model.CorrigeData;
 import model.Querys;
 import model.ValidaCPF;
@@ -19,6 +20,45 @@ import model.ValidaCPF;
  * @author leo_m
  */
 public class TelaCadastro extends javax.swing.JFrame {
+
+    private void erroDados() {
+        String erro = "Preencha a o ";
+
+        switch (this.erroCamp) {
+            case 1:
+                erro += "nome.";
+                break;
+            case 2:
+                erro += "cpf.";
+                break;
+            case 3:
+                erro += "data de nascimento.";
+                break;
+            case 4:
+                erro += "nome da mãe.";
+                break;
+            case 5:
+                erro += "nome do pai.";
+                break;
+            case 6:
+                erro += "endereço.";
+                break;
+            case 7:
+                erro += "número.";
+                break;
+            case 8:
+                erro += "bairro.";
+                break;
+            case 9:
+                erro += "complemento.";
+                break;
+            case 10:
+                erro += "sexo.";
+                break;
+        }
+        JOptionPane.showMessageDialog(null, erro);
+
+    }
 
     private boolean verificaDados() {
         ValidaCPF vcpf = new ValidaCPF();
@@ -77,12 +117,12 @@ public class TelaCadastro extends javax.swing.JFrame {
                 doador.setSexo("F");
             }
             if (qr.novoDoador(doador)) {
-                JOptionPane.showMessageDialog(null, "Pessoa inserida!");
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
             } else {
-                JOptionPane.showMessageDialog(null, "Erro na insercao!");
+                JOptionPane.showMessageDialog(null, "Cadastro não realizado!");
             }
         } else {
-
+            erroDados();
         }
     }
 
