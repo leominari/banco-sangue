@@ -50,7 +50,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         lbDocumentoDoador.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lbDocumentoDoador.setForeground(new java.awt.Color(128, 0, 0));
-        lbDocumentoDoador.setText("CPF do Doador");
+        lbDocumentoDoador.setText("Insira o CPF do Doador");
         lbDocumentoDoador.setToolTipText("");
 
         btnVerificar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -64,6 +64,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         tfDocumentoDoador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###########"))));
         tfDocumentoDoador.setToolTipText("");
+        tfDocumentoDoador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDocumentoDoadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,20 +84,22 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGap(241, 241, 241)
                         .addComponent(btnVerificar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbDocumentoDoador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfDocumentoDoador))))
-                .addContainerGap(224, Short.MAX_VALUE))
+                        .addGap(182, 182, 182)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbDocumentoDoador)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(tfDocumentoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(lbBancoSangue)
-                .addGap(38, 38, 38)
+                .addGap(31, 31, 31)
                 .addComponent(lbDocumentoDoador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(tfDocumentoDoador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(btnVerificar)
@@ -115,7 +122,10 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void buscaDoador(String documento) throws SQLException {
         if (this.doador.getDados(documento)) {
-            //vai pra tela de doadcao
+            TelaAvisos ta = new TelaAvisos();
+            dispose();
+            ta.setDoador(doador);
+            ta.setVisible(true);
         } else {
             TelaCadastro tc = new TelaCadastro();
             dispose();
@@ -137,6 +147,10 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnVerificarActionPerformed
+
+    private void tfDocumentoDoadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDocumentoDoadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDocumentoDoadorActionPerformed
 
     /**
      * @param args the command line arguments
